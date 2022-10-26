@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { getLatestTweets } from "./service.js";
-import classNames from 'classnames'
+import classNames from 'classnames';
 
-import './TweetsPage.css'
+import styles from './TweetsPage.module.css';
 
 
   const TweetsPage = () => {
 
     const [tweets, setTweets] = useState([]);
+    console.log(styles);
 //useEffect en si no puede ser async/await
 //pero podemos crear execute dentro y hacerlo ahi
     useEffect(() => {
@@ -21,9 +22,9 @@ import './TweetsPage.css'
          
         setTweets(tweets);;
     }); */
-    }, [])
+    }, []);
 
-    const className = classNames('tweets__page', { empty: !tweets.length})
+    const className = classNames(styles.tweets__page, { empty: !tweets.length});
 
     return (
         <div className={className}>
