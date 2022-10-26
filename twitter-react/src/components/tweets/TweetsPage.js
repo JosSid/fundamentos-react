@@ -1,28 +1,42 @@
-const tweets = [
-    {
-      content:
-        "Nos hace mucha ilusión anunciar la fecha del ESTRENO de 'Eso que tu me das', documental con la última entrevista a Pau Donés. 30 DE SEPTIEMBRE, en cines de toda España. @WarnerBrosSpain Y este es el cartel definitivo, con algunas frases de críticas que ya se han publicado.",
-      userId: 1,
-      updatedAt: '2021-03-15T18:23:57.579Z',
-      id: 1,
-    },
-    {
-      content:
-        "'Soy muy fan tuya, pero ahora no me acuerdo cómo te llamas' (Una desconocida, en la calle).",
-      userId: 1,
-      updatedAt: '2021-03-15T18:24:56.773Z',
-      id: 2,
-    },
-  ];
+import { useEffect, useState } from "react";
+import { getLatestTweets } from "./service.js";
+import classNames from 'classnames'
+
+import './TweetsPage.css'
+
 
   const TweetsPage = () => {
+
+    const [tweets, setTweets] = useState([]);
+//useEffect en si no puede ser async/await
+//pero podemos crear execute dentro y hacerlo ahi
+    useEffect(() => {
+        const execute = async () => {
+            const tweets = await getLatestTweets();
+            setTweets(tweets);
+        };
+        execute();
+
+/*         getLatestTweets().then(tweets =>{
+         
+        setTweets(tweets);;
+    }); */
+    }, [])
+
+    const className = classNames('tweets__page', { empty: !tweets.length})
+
     return (
-        <div className="tweets__page">
-            <ul>
+        <div className={className}>
+            {tweets.length ? (
+                <ul>
                 {tweets.map(tweet => (
                 <li key={tweet.id}>{tweet.content}</li>
                 ))}
             </ul>
+            ) : (
+                <button>Write your tweets</button>
+            )}
+            
         </div>
     );
 
