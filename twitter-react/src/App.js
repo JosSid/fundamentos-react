@@ -1,8 +1,9 @@
+import TweetsPage from "./components/tweets/TweetsPage.js";
+
 function App() {
   return (
     <div className="App">
-      
-      hello React
+      <TweetsPage />
     </div>
   );
 }
