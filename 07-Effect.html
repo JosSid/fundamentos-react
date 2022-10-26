@@ -1,0 +1,65 @@
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+
+  <script
+    crossorigin
+    src="https://unpkg.com/react@18/umd/react.development.js"
+  ></script>
+
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+  ></script>
+
+  <script
+  crossorigin
+  src="https://unpkg.com/@babel/standalone@7.8.3/babel.min.js"
+></script>
+
+  <script type="text/babel">
+    const rootElement = document.getElementById('root');
+    const reactRoot = ReactDOM.createRoot(rootElement)
+
+    const Clock = () => {
+      const [count, setCount] = React.useState(0)
+      const [now, setNow] = React.useState(new Date().toLocaleString());
+
+      React.useEffect(() => {
+        const tick = () => setNow(new Date().toLocaleString())
+        
+        setInterval(() => {
+          tick();
+        }, 1000)
+      }, []);
+      
+      return (
+        <div className="container"
+        onClick={() => {
+          
+          
+          setCount(count + 1)
+        }}>
+          <span className="clock">{now}-{count}</span>
+        </div>
+      );
+    }
+
+
+      
+    reactRoot.render(
+      
+        <Clock/>
+      
+    )
+  
+
+   
+   
+
+   
+
+    
+  </script>
+</html>

@@ -22,20 +22,29 @@
     const rootElement = document.getElementById('root');
     const reactRoot = ReactDOM.createRoot(rootElement)
 
-    function tick() {
-      const now = new Date().toLocaleString()
+    const Clock = () => {
+      const [count, setCount] = React.useState(0)
+      const [now, setNow] = React.useState(new Date().toLocaleString());
 
-      const element = (
-        <div className="container" id="element">
-          <span className="clock">{now}</span>
+      return (
+        <div className="container"
+        onClick={() => {
+          
+          setNow(new Date().toLocaleString())
+         // setCount(count + 1)
+        }}>
+          <span className="clock">{now}-{count}</span>
         </div>
       );
-      reactRoot.render(element)
     }
 
+
+      
+    reactRoot.render(<Clock/>)
+  
+
    
-    tick()
-    setInterval(tick, 1000)
+   
 
    
 
